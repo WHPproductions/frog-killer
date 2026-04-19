@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b46nla3kbmpeo"]
+
+[ext_resource type="Script" uid="uid://djmrsrbutr8se" path="res://tests/hadi/map.gd" id="1_ej3cq"]
+[ext_resource type="PackedScene" uid="uid://bkkarp3vmlnge" path="res://features/main_tower/main_tower.tscn" id="2_a5vrk"]
+
+[sub_resource type="TileSet" id="TileSet_ej3cq"]
+
+[node name="Map" type="Node2D" unique_id=2081847295]
+script = ExtResource("1_ej3cq")
+
+[node name="MainTower" parent="." unique_id=1383433471 instance=ExtResource("2_a5vrk")]
+
+[node name="Tower" type="TileMapLayer" parent="." unique_id=67363473]
+tile_set = SubResource("TileSet_ej3cq")
+
+[node name="Terrain" type="Sprite2D" parent="." unique_id=672978371]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bkkarp3vmlnge"]
+
+[ext_resource type="Script" uid="uid://tlgy28x8mlty" path="res://features/main_tower/main_tower.gd" id="1_kjshb"]
+
+[node name="MainTower" type="StaticBody2D" unique_id=1383433471]
+script = ExtResource("1_kjshb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=186280670]
