@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cm02d7jmhcy3p"]
+
+[ext_resource type="PackedScene" uid="uid://bkkarp3vmlnge" path="res://features/main_tower/main_tower.tscn" id="1_wkxgm"]
+[ext_resource type="PackedScene" uid="uid://b5vm2h8rfrcai" path="res://features/enemies/enemy_spawner.tscn" id="2_ckkni"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wkxgm"]
+vertices = PackedVector2Array(1270.0078, 9.9765625, 1270.9766, 710.9922, 10, 710, 10, 8.0078125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -2, 0, 720, 1281, 721, 1280, 0)])
+
+[node name="PlayTest" type="Node2D" unique_id=1564490305]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1919345508]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=289606358]
+layout_mode = 0
+offset_top = 668.0
+offset_right = 40.0
+offset_bottom = 708.0
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect" unique_id=382083463]
+layout_mode = 0
+offset_left = 1235.0
+offset_top = 665.0
+offset_right = 1275.0
+offset_bottom = 705.0
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect" unique_id=227112777]
+layout_mode = 0
+offset_left = 1235.0
+offset_top = 4.0
+offset_right = 1275.0
+offset_bottom = 44.0
+
+[node name="MainTower" parent="." unique_id=1383433471 instance=ExtResource("1_wkxgm")]
+position = Vector2(608, 354)
+
+[node name="EnemySpawner" parent="." unique_id=1276149542 node_paths=PackedStringArray("play_area") instance=ExtResource("2_ckkni")]
+play_area = NodePath("ReferenceRect")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="EnemySpawner" unique_id=1775236385]
+offset_left = 255.0
+offset_top = 125.0
+offset_right = 1007.0
+offset_bottom = 580.0
+border_width = 14.5
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1646511763]
+navigation_polygon = SubResource("NavigationPolygon_wkxgm")

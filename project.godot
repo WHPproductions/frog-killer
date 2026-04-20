@@ -14,6 +14,20 @@ config/name="Frog Killer"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Game="*uid://dq80eb3fwaa4y"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[layer_names]
+
+2d_physics/layer_1="Tower"
+2d_physics/layer_2="Enemy"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

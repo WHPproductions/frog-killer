@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b5vm2h8rfrcai"]
+
+[ext_resource type="Script" uid="uid://bypowdo6uqpjl" path="res://features/enemies/enemy_spawner.gd" id="1_x0133"]
+[ext_resource type="Script" uid="uid://fuq510tc73a8" path="res://features/core/object_pool.gd" id="2_andtd"]
+[ext_resource type="Script" uid="uid://bt6iqepuok2gx" path="res://features/enemies/data/enemy_data.gd" id="2_tsthp"]
+[ext_resource type="Resource" uid="uid://p8lcay7k88i3" path="res://features/enemies/data/base_enemy_data.tres" id="3_083j6"]
+[ext_resource type="PackedScene" uid="uid://ds5ituceejw7v" path="res://features/enemies/enemy.tscn" id="3_tsthp"]
+
+[sub_resource type="Curve" id="Curve_x0133"]
+_limits = [0.2, 20.0, 0.0, 10.0]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(10, 20), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_andtd"]
+_limits = [1.0, 2.5, 0.0, 10.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(5, 1.4024767), 0.0, 0.0, 0, 0, Vector2(10, 2.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_tsthp"]
+_limits = [1.0, 100.0, 0.0, 20.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(20, 100), 16.576143, 0.0, 0, 0]
+point_count = 2
+
+[node name="EnemySpawner" type="Node2D" unique_id=1276149542]
+script = ExtResource("1_x0133")
+enemies = Array[ExtResource("2_tsthp")]([ExtResource("3_083j6")])
+spawn_rate_curve = SubResource("Curve_x0133")
+speed_rate_curve = SubResource("Curve_andtd")
+health_rate_curve = SubResource("Curve_tsthp")
+
+[node name="EnemyPool" type="Node" parent="." unique_id=757539498]
+script = ExtResource("2_andtd")
+scene_to_pool = ExtResource("3_tsthp")
+metadata/_custom_type_script = "uid://fuq510tc73a8"

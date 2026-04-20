@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ds5ituceejw7v"]
+
+[ext_resource type="Script" uid="uid://c1kx01wgkpbbn" path="res://features/enemies/enemy.gd" id="1_f0acv"]
+[ext_resource type="Texture2D" uid="uid://nxm8ywnts77t" path="res://features/enemies/data/temp_enemy_sprite.png" id="2_4ad74"]
+[ext_resource type="Resource" uid="uid://p8lcay7k88i3" path="res://features/enemies/data/base_enemy_data.tres" id="2_dkn5w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0acv"]
+radius = 61.03278
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ad74"]
+radius = 500.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dkn5w"]
+radius = 61.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1889974149]
+collision_layer = 2
+script = ExtResource("1_f0acv")
+data = ExtResource("2_dkn5w")
+target_size = Vector2(196, 196)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=995759953]
+texture = ExtResource("2_4ad74")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1209580335]
+shape = SubResource("CircleShape2D_f0acv")
+debug_color = Color(0, 0.6, 0.7019608, 0.15686275)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=653769051]
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=2011049368]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=57899177]
+shape = SubResource("CircleShape2D_4ad74")
+debug_color = Color(0, 0.6, 0.7019608, 0.15686275)
+
+[node name="DamageZone" type="Area2D" parent="." unique_id=1289551423]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone" unique_id=18461867]
+shape = SubResource("CircleShape2D_dkn5w")
+debug_color = Color(0, 0.6, 0.69803923, 0.15686275)
