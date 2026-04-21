@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://cm02d7jmhcy3p"]
 
+[ext_resource type="Texture2D" uid="uid://rj5vgc1g7p5j" path="res://assets/Environment Assets/environment - bleed reference.png" id="1_blxac"]
 [ext_resource type="PackedScene" uid="uid://bkkarp3vmlnge" path="res://features/main_tower/main_tower.tscn" id="1_wkxgm"]
 [ext_resource type="PackedScene" uid="uid://b5vm2h8rfrcai" path="res://features/enemies/enemy_spawner.tscn" id="2_ckkni"]
 [ext_resource type="PackedScene" uid="uid://y78m0leffckj" path="res://features/small_towers/small_tower.tscn" id="3_ckkni"]
 [ext_resource type="Script" uid="uid://dp00kdpugk4u0" path="res://features/small_towers/data/small_tower_data.gd" id="4_ru6c5"]
 [ext_resource type="Resource" uid="uid://b7gbnnjc51ts3" path="res://features/small_towers/data/horizontal_light.tres" id="4_vuk5j"]
+[ext_resource type="Texture2D" uid="uid://bsdj2lqqnbuge" path="res://assets/vfx/proj_tower_yellow.png" id="5_7jmhw"]
 [ext_resource type="Resource" uid="uid://hxkhvqft2dwt" path="res://features/small_towers/data/vertical_light.tres" id="5_27782"]
-[ext_resource type="Texture2D" uid="uid://hpbvcjw1wlf7" path="res://assets/Towers/4_side_tower.png" id="5_blxac"]
+[ext_resource type="Texture2D" uid="uid://p5ia6vswbcmb" path="res://assets/Towers/4 side tower anim-Sheet.png" id="7_7jmhw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wkxgm"]
 vertices = PackedVector2Array(1270.0078, 9.9765625, 1270.9766, 710.9922, 10, 710, 10, 8.0078125)
@@ -17,7 +19,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(0, -2, 0, 720, 1281, 72
 resource_local_to_scene = true
 script = ExtResource("4_ru6c5")
 name = "Heavy"
-sprite = ExtResource("5_blxac")
+sprite = ExtResource("7_7jmhw")
+bullet_sprite = ExtResource("5_7jmhw")
 damage = 4.0
 health = 5.0
 attack_directions = Array[int]([0, 1])
@@ -28,7 +31,8 @@ metadata/_custom_type_script = "uid://dp00kdpugk4u0"
 resource_local_to_scene = true
 script = ExtResource("4_ru6c5")
 name = "Heavy"
-sprite = ExtResource("5_blxac")
+sprite = ExtResource("7_7jmhw")
+bullet_sprite = ExtResource("5_7jmhw")
 damage = 4.0
 health = 5.0
 attack_directions = Array[int]([0, 1])
@@ -39,7 +43,8 @@ metadata/_custom_type_script = "uid://dp00kdpugk4u0"
 resource_local_to_scene = true
 script = ExtResource("4_ru6c5")
 name = "Heavy"
-sprite = ExtResource("5_blxac")
+sprite = ExtResource("7_7jmhw")
+bullet_sprite = ExtResource("5_7jmhw")
 damage = 4.0
 health = 5.0
 attack_directions = Array[int]([0, 1])
@@ -50,7 +55,8 @@ metadata/_custom_type_script = "uid://dp00kdpugk4u0"
 resource_local_to_scene = true
 script = ExtResource("4_ru6c5")
 name = "Heavy"
-sprite = ExtResource("5_blxac")
+sprite = ExtResource("7_7jmhw")
+bullet_sprite = ExtResource("5_7jmhw")
 damage = 4.0
 health = 5.0
 attack_directions = Array[int]([0, 1])
@@ -58,6 +64,12 @@ weight = 30.0
 metadata/_custom_type_script = "uid://dp00kdpugk4u0"
 
 [node name="PlayTest" type="Node2D" unique_id=1564490305]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1177098424]
+texture_filter = 1
+position = Vector2(636, 358)
+scale = Vector2(2.4086542, 2.4086535)
+texture = ExtResource("1_blxac")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1919345508]
 offset_right = 40.0
@@ -99,34 +111,36 @@ border_width = 14.5
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1646511763]
 navigation_polygon = SubResource("NavigationPolygon_wkxgm")
 
-[node name="SmallTower" parent="." unique_id=1200105900 instance=ExtResource("3_ckkni")]
+[node name="StaticTowers" type="Node2D" parent="." unique_id=64498269]
+
+[node name="SmallTower" parent="StaticTowers" unique_id=1200105900 instance=ExtResource("3_ckkni")]
 position = Vector2(876, 220)
 data = SubResource("Resource_7jmhw")
 
-[node name="SmallTower2" parent="." unique_id=1784904353 instance=ExtResource("3_ckkni")]
+[node name="SmallTower2" parent="StaticTowers" unique_id=1784904353 instance=ExtResource("3_ckkni")]
 position = Vector2(389, 477)
 data = SubResource("Resource_4n26k")
 
-[node name="SmallTower3" parent="." unique_id=692250971 instance=ExtResource("3_ckkni")]
+[node name="SmallTower3" parent="StaticTowers" unique_id=692250971 instance=ExtResource("3_ckkni")]
 position = Vector2(456, 227)
 data = SubResource("Resource_pabcl")
 
-[node name="SmallTower4" parent="." unique_id=60279804 instance=ExtResource("3_ckkni")]
+[node name="SmallTower4" parent="StaticTowers" unique_id=60279804 instance=ExtResource("3_ckkni")]
 position = Vector2(748, 466)
 data = SubResource("Resource_la60a")
 
-[node name="SmallTower5" parent="." unique_id=781164793 instance=ExtResource("3_ckkni")]
+[node name="SmallTower5" parent="StaticTowers" unique_id=781164793 instance=ExtResource("3_ckkni")]
 position = Vector2(642, 210)
 data = ExtResource("4_vuk5j")
 
-[node name="SmallTower6" parent="." unique_id=824375847 instance=ExtResource("3_ckkni")]
+[node name="SmallTower6" parent="StaticTowers" unique_id=824375847 instance=ExtResource("3_ckkni")]
 position = Vector2(604, 462)
 data = ExtResource("4_vuk5j")
 
-[node name="SmallTower7" parent="." unique_id=172712991 instance=ExtResource("3_ckkni")]
+[node name="SmallTower7" parent="StaticTowers" unique_id=172712991 instance=ExtResource("3_ckkni")]
 position = Vector2(849, 338)
 data = ExtResource("5_27782")
 
-[node name="SmallTower8" parent="." unique_id=2057212411 instance=ExtResource("3_ckkni")]
+[node name="SmallTower8" parent="StaticTowers" unique_id=2057212411 instance=ExtResource("3_ckkni")]
 position = Vector2(414, 345)
 data = ExtResource("5_27782")

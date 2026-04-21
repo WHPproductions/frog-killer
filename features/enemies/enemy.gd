@@ -7,13 +7,20 @@ signal died(enemy: Enemy)
 @export var data: EnemyData:
 	set(value):
 		data = value
-		_rescale_sprite()
+
+		if not is_inside_tree():
+			return
+			
+		sprite.texture = value.sprite
+		# _rescale_sprite()
 
 @export var target_size: Vector2 = Vector2(32, 32)
 
 @onready var nav_agent := $NavigationAgent2D
 @onready var detection_area := $DetectionArea
 @onready var damage_zone := $DamageZone
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim_tree: AnimationTree = $AnimationTree
 
 var _nearby_towers: Array[SmallTower] = []
 var _damage_timer: Timer
@@ -23,8 +30,7 @@ var _is_damaging_main_tower: bool
 const DAMAGE_DELAY: float = 1
 
 func _ready() -> void:
-	_rescale_sprite()
-
+	# _rescale_sprite()
 	_damage_timer = Timer.new()
 	_damage_timer.timeout.connect(_on_damage_timeout)
 	add_child(_damage_timer)
@@ -51,18 +57,17 @@ func _move(delta: float) -> void:
 	var direction = global_position.direction_to(next_path_pos)
 	
 	velocity = direction * data.speed
+	anim_tree.set("parameters/Walk/blend_position", direction)
 
 	global_position += velocity * delta
 
 func _on_damage_timeout() -> void:
-	print("damage timeout")
 	if _is_damaging_main_tower:
 		Game.main_tower.damage(data.damage)
 	for tower in _damaging_towers:
 		tower.damage(data.damage)
 
 func _on_damage_zone_entered(body: Node2D) -> void:
-	print(body)
 	if body is SmallTower:
 		var tower = body as SmallTower
 		if tower not in _damaging_towers:

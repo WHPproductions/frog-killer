@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="SmallTowerData" format=3 uid="uid://npbki1lqf7oi"]
 
+[ext_resource type="Texture2D" uid="uid://bsdj2lqqnbuge" path="res://assets/vfx/proj_tower_yellow.png" id="1_r8hbf"]
 [ext_resource type="Script" uid="uid://dp00kdpugk4u0" path="res://features/small_towers/data/small_tower_data.gd" id="1_wt2bp"]
-[ext_resource type="Texture2D" uid="uid://hpbvcjw1wlf7" path="res://assets/Towers/4_side_tower.png" id="2_wt2bp"]
+[ext_resource type="Texture2D" uid="uid://p5ia6vswbcmb" path="res://assets/Towers/4 side tower anim-Sheet.png" id="3_r8hbf"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_wt2bp")
 name = "Heavy"
-sprite = ExtResource("2_wt2bp")
+sprite = ExtResource("3_r8hbf")
+bullet_sprite = ExtResource("1_r8hbf")
 damage = 4.0
 health = 5.0
 attack_directions = Array[int]([0, 1])

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://c2n657sx3287u"]
+
+[ext_resource type="Script" uid="uid://bt6iqepuok2gx" path="res://features/enemies/data/enemy_data.gd" id="1_j3e6a"]
+[ext_resource type="Texture2D" uid="uid://c6lhury6kpcoq" path="res://assets/characters sprites/gs26_enemy smal_3column.png" id="2_j3e6a"]
+
+[resource]
+script = ExtResource("1_j3e6a")
+sprite = ExtResource("2_j3e6a")
+metadata/_custom_type_script = "uid://bt6iqepuok2gx"

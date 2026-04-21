@@ -16,7 +16,7 @@ func _create_new_object() -> Node:
 	_pool.append(obj)
 	
 	# Add to tree but keep inactive
-	add_child.call_deferred(obj)
+	add_child(obj)
 	obj.process_mode = PROCESS_MODE_DISABLED
 	obj.hide()
 	return obj
@@ -35,8 +35,6 @@ func get_object() -> Node:
 	# If none found, grow the pool
 	if not obj:
 		obj = _create_new_object()
-		# Wait for it to be ready since it's deferred
-		await obj.ready
 
 	obj.process_mode = PROCESS_MODE_INHERIT
 	obj.show()

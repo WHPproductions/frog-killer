@@ -2,18 +2,93 @@
 
 [ext_resource type="Script" uid="uid://b5hcs5cune7rb" path="res://features/small_towers/small_tower.gd" id="1_ew7wo"]
 [ext_resource type="Resource" uid="uid://npbki1lqf7oi" path="res://features/small_towers/data/heavy.tres" id="2_r1x0c"]
-[ext_resource type="Texture2D" uid="uid://hpbvcjw1wlf7" path="res://assets/Towers/4_side_tower.png" id="2_t6tju"]
+[ext_resource type="Texture2D" uid="uid://p5ia6vswbcmb" path="res://assets/Towers/4 side tower anim-Sheet.png" id="3_r1x0c"]
 [ext_resource type="Script" uid="uid://fuq510tc73a8" path="res://features/core/object_pool.gd" id="3_s46ib"]
 [ext_resource type="PackedScene" uid="uid://iivthi8vrr7c" path="res://features/bullet/bullet.tscn" id="4_r1x0c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqfqe"]
 radius = 16.0
 
+[sub_resource type="Animation" id="Animation_r1x0c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ckn0a"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_msuhk"]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s67l8"]
+_data = {
+&"RESET": SubResource("Animation_r1x0c"),
+&"idle": SubResource("Animation_ckn0a"),
+&"shoot": SubResource("Animation_msuhk")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r1x0c"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ckn0a"]
+animation = &"shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_msuhk"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s67l8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xpluh"]
+states/Idle/node = SubResource("AnimationNodeAnimation_r1x0c")
+states/Idle/position = Vector2(316, 94)
+states/Shoot/node = SubResource("AnimationNodeAnimation_ckn0a")
+states/Shoot/position = Vector2(495, 94)
+transitions = ["Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_msuhk"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_s67l8")]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6tju"]
 resource_local_to_scene = true
 radius = 16.0
 
 [node name="SmallTower" type="StaticBody2D" unique_id=1200105900 node_paths=PackedStringArray("up", "down", "left", "right")]
+scale = Vector2(2, 2)
 script = ExtResource("1_ew7wo")
 data = ExtResource("2_r1x0c")
 up = NodePath("Markers/UpMarker")
@@ -25,7 +100,16 @@ right = NodePath("Markers/RightMarker")
 shape = SubResource("CircleShape2D_sqfqe")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1280641281]
-texture = ExtResource("2_t6tju")
+texture_filter = 1
+texture = ExtResource("3_r1x0c")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1759078727]
+libraries/ = SubResource("AnimationLibrary_s67l8")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1476829315]
+tree_root = SubResource("AnimationNodeStateMachine_xpluh")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="Markers" type="Node2D" parent="." unique_id=1701443165]
 

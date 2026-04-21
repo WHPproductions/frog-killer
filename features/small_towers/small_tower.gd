@@ -23,6 +23,8 @@ signal destroyed(tower: SmallTower)
 @onready var sprite := $Sprite2D
 @onready var detection_area := $DetectionArea
 @onready var detection_shape := $DetectionArea/CollisionShape2D.shape as CircleShape2D
+@onready var anim_tree: AnimationTree = $AnimationTree
+@onready var anim_state = anim_tree.get("parameters/playback")
 
 var _attack_timer: Timer
 var _enemies_in_range: Array[Enemy] = []
@@ -33,7 +35,9 @@ func _ready() -> void:
 	add_child(_attack_timer)
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
-	data = data # update in case from testing
+	
+	# testing, for now need to duplicate
+	data = data.duplicate()
 
 func damage(value: float) -> void:
 	data.health = max(0, data.health - value)
@@ -44,6 +48,8 @@ func damage(value: float) -> void:
 func _on_attack_timeout() -> void:
 	if _enemies_in_range.is_empty():
 		return
+	
+	anim_state.travel("Shoot")
 	
 	for direction in data.attack_directions:
 		match direction:
@@ -56,6 +62,7 @@ func _on_attack_timeout() -> void:
 
 func _spawn_bullet(position_reference: Marker2D, direction: Vector2i) -> void:
 	var bullet = await bullet_pool.get_object() as Bullet
+	bullet.sprite.texture = data.bullet_sprite
 	bullet.global_position = position_reference.global_position
 	bullet.direction = direction
 	bullet.hit.connect(_on_bullet_hit)
@@ -77,8 +84,8 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		_enemies_in_range.erase(body)
-	elif body is Bullet: # out of range, return to pool
-		_return_bullet(body)
+	# elif body is Bullet: # out of range, return to pool
+		# _return_bullet(body)
 
 func _return_bullet(bullet: Bullet) -> void:
 	if bullet.hit.is_connected(_on_bullet_hit):

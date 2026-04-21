@@ -1,8 +1,139 @@
 [gd_scene format=3 uid="uid://ds5ituceejw7v"]
 
 [ext_resource type="Script" uid="uid://c1kx01wgkpbbn" path="res://features/enemies/enemy.gd" id="1_f0acv"]
-[ext_resource type="Texture2D" uid="uid://nxm8ywnts77t" path="res://features/enemies/data/temp_enemy_sprite.png" id="2_4ad74"]
 [ext_resource type="Resource" uid="uid://p8lcay7k88i3" path="res://features/enemies/data/base_enemy_data.tres" id="2_dkn5w"]
+[ext_resource type="Texture2D" uid="uid://cjudr54t5f8m5" path="res://assets/characters sprites/gs26_enemy big_3column_correct_orientation.png" id="3_dkn5w"]
+
+[sub_resource type="Animation" id="Animation_qnv5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dkn5w"]
+resource_name = "walk_down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_b1a0d"]
+resource_name = "walk_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_m30ro"]
+resource_name = "walk_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_0rqsj"]
+resource_name = "walk_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qnv5d"]
+_data = {
+&"RESET": SubResource("Animation_qnv5d"),
+&"walk_down": SubResource("Animation_dkn5w"),
+&"walk_left": SubResource("Animation_b1a0d"),
+&"walk_right": SubResource("Animation_m30ro"),
+&"walk_up": SubResource("Animation_0rqsj")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b1a0d"]
+animation = &"walk_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwuxy"]
+animation = &"walk_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugv8o"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x4k1d"]
+animation = &"walk_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ti2ns"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_b1a0d")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_gwuxy")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_ugv8o")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_x4k1d")
+blend_point_3/pos = Vector2(-1, 0)
+x_label = "y"
+y_label = "x"
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_m30ro"]
+graph_offset = Vector2(-328.02274, 6.5009155)
+nodes/Walk/node = SubResource("AnimationNodeBlendSpace2D_ti2ns")
+nodes/Walk/position = Vector2(40, 100)
+node_connections = [&"output", 0, &"Walk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f0acv"]
 radius = 61.03278
@@ -14,13 +145,27 @@ radius = 500.0
 radius = 61.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1889974149]
+scale = Vector2(0.4, 0.4)
 collision_layer = 2
 script = ExtResource("1_f0acv")
 data = ExtResource("2_dkn5w")
 target_size = Vector2(196, 196)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=995759953]
-texture = ExtResource("2_4ad74")
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("3_dkn5w")
+hframes = 4
+vframes = 3
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1598021142]
+libraries/ = SubResource("AnimationLibrary_qnv5d")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=258528068]
+tree_root = SubResource("AnimationNodeBlendTree_m30ro")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Walk/blend_position = Vector2(0.80974483, -0.21264362)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1209580335]
 shape = SubResource("CircleShape2D_f0acv")

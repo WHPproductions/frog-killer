@@ -9,6 +9,7 @@ var hit_count: int
 @export var speed: float = 100
 
 @onready var damage_area := $DamageArea
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready():
 	damage_area.body_entered.connect(_on_body_entered)

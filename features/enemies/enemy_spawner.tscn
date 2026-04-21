@@ -5,10 +5,12 @@
 [ext_resource type="Script" uid="uid://bt6iqepuok2gx" path="res://features/enemies/data/enemy_data.gd" id="2_tsthp"]
 [ext_resource type="Resource" uid="uid://p8lcay7k88i3" path="res://features/enemies/data/base_enemy_data.tres" id="3_083j6"]
 [ext_resource type="PackedScene" uid="uid://ds5ituceejw7v" path="res://features/enemies/enemy.tscn" id="3_tsthp"]
+[ext_resource type="Resource" uid="uid://d3o2koroyb8c5" path="res://features/enemies/data/base_enemy_data_med.tres" id="4_xvf3k"]
+[ext_resource type="Resource" uid="uid://c2n657sx3287u" path="res://features/enemies/data/base_enemy_data_small.tres" id="5_f7qye"]
 
 [sub_resource type="Curve" id="Curve_x0133"]
 _limits = [0.2, 20.0, 0.0, 10.0]
-_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(10, 20), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 6.520771), 0.0, 0.0, 0, 0, Vector2(10, 20), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_andtd"]
@@ -23,7 +25,7 @@ point_count = 2
 
 [node name="EnemySpawner" type="Node2D" unique_id=1276149542]
 script = ExtResource("1_x0133")
-enemies = Array[ExtResource("2_tsthp")]([ExtResource("3_083j6")])
+enemies = Array[ExtResource("2_tsthp")]([ExtResource("3_083j6"), ExtResource("4_xvf3k"), ExtResource("5_f7qye")])
 spawn_rate_curve = SubResource("Curve_x0133")
 speed_rate_curve = SubResource("Curve_andtd")
 health_rate_curve = SubResource("Curve_tsthp")

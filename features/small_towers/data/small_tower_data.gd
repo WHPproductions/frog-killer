@@ -4,6 +4,7 @@ class_name SmallTowerData
 @export_category("Identifier")
 @export var name: String
 @export var sprite: Texture2D
+@export var bullet_sprite: Texture2D
 
 @export_category("Stats")
 @export var damage: float = 2
