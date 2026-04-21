@@ -1,0 +1,2 @@
+tree_1 layer paling atas, tree_30 layer paling Bawah
+framenya seukuran sama file environment yang full
