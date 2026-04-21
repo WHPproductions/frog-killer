@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SmallTowerData" format=3 uid="uid://b7gbnnjc51ts3"]
+
+[ext_resource type="Script" uid="uid://dp00kdpugk4u0" path="res://features/small_towers/data/small_tower_data.gd" id="1_vd7x4"]
+[ext_resource type="Texture2D" uid="uid://ckepn6siwfawm" path="res://assets/Towers/horizontal_tower.png" id="2_tx5d2"]
+
+[resource]
+script = ExtResource("1_vd7x4")
+name = "Horizontal Light"
+sprite = ExtResource("2_tx5d2")
+shoot_delay = 0.5
+weight = 35.0
+attack_directions = Array[int]([1])
+metadata/_custom_type_script = "uid://dp00kdpugk4u0"

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://iivthi8vrr7c"]
+
+[ext_resource type="Script" uid="uid://bflm7wyk46xsb" path="res://features/bullet/bullet.gd" id="1_ivxx0"]
+[ext_resource type="Texture2D" uid="uid://d1fo88fascoqj" path="res://features/bullet/12x12px box.png" id="2_akr2k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avmv6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ivxx0"]
+
+[node name="Bullet" type="CharacterBody2D" unique_id=1444077605]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ivxx0")
+speed = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=684704372]
+shape = SubResource("CircleShape2D_avmv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=562333757]
+texture_filter = 1
+texture = ExtResource("2_akr2k")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=472273384]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=436393326]
+shape = SubResource("CircleShape2D_ivxx0")

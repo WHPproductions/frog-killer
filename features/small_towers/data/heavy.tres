@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SmallTowerData" format=3 uid="uid://npbki1lqf7oi"]
+
+[ext_resource type="Script" uid="uid://dp00kdpugk4u0" path="res://features/small_towers/data/small_tower_data.gd" id="1_wt2bp"]
+[ext_resource type="Texture2D" uid="uid://hpbvcjw1wlf7" path="res://assets/Towers/4_side_tower.png" id="2_wt2bp"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_wt2bp")
+name = "Heavy"
+sprite = ExtResource("2_wt2bp")
+damage = 4.0
+health = 5.0
+attack_directions = Array[int]([0, 1])
+weight = 30.0
+metadata/_custom_type_script = "uid://dp00kdpugk4u0"

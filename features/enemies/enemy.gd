@@ -3,11 +3,11 @@ class_name Enemy
 
 signal died(enemy: Enemy)
 
+# Expected to set a unique instance of EnemyData 
 @export var data: EnemyData:
 	set(value):
 		data = value
 		_rescale_sprite()
-		_health = value.health
 
 @export var target_size: Vector2 = Vector2(32, 32)
 
@@ -15,7 +15,6 @@ signal died(enemy: Enemy)
 @onready var detection_area := $DetectionArea
 @onready var damage_zone := $DamageZone
 
-var _health: float
 var _nearby_towers: Array[SmallTower] = []
 var _damage_timer: Timer
 var _damaging_towers: Array[SmallTower] = []
@@ -40,8 +39,8 @@ func _physics_process(delta: float) -> void:
 	_move(delta)
 
 func damage(value: float) -> void:
-	_health -= value
-	if _health <= 0:
+	data.health -= value
+	if data.health <= 0:
 		died.emit(self )
 
 func _move(delta: float) -> void:
@@ -56,12 +55,14 @@ func _move(delta: float) -> void:
 	global_position += velocity * delta
 
 func _on_damage_timeout() -> void:
+	print("damage timeout")
 	if _is_damaging_main_tower:
 		Game.main_tower.damage(data.damage)
 	for tower in _damaging_towers:
 		tower.damage(data.damage)
 
 func _on_damage_zone_entered(body: Node2D) -> void:
+	print(body)
 	if body is SmallTower:
 		var tower = body as SmallTower
 		if tower not in _damaging_towers:
@@ -112,7 +113,7 @@ func _on_visibility_changed() -> void:
 
 func _update_target() -> void:
 	if _nearby_towers.is_empty():
-		_set_destination(Vector2.ZERO)
+		_set_destination(Game.main_tower.global_position)
 		return
 	
 	var closest_tower: SmallTower

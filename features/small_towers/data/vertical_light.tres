@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SmallTowerData" format=3 uid="uid://hxkhvqft2dwt"]
+
+[ext_resource type="Script" uid="uid://dp00kdpugk4u0" path="res://features/small_towers/data/small_tower_data.gd" id="1_fp3vo"]
+[ext_resource type="Texture2D" uid="uid://c8ok6bqiyhyx3" path="res://assets/Towers/vertical_tower.png" id="2_fp3vo"]
+
+[resource]
+script = ExtResource("1_fp3vo")
+name = "Vertical Light"
+sprite = ExtResource("2_fp3vo")
+shoot_delay = 0.5
+weight = 35.0
+attack_directions = Array[int]([0])
+metadata/_custom_type_script = "uid://dp00kdpugk4u0"

@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://y78m0leffckj"]
+
+[ext_resource type="Script" uid="uid://b5hcs5cune7rb" path="res://features/small_towers/small_tower.gd" id="1_ew7wo"]
+[ext_resource type="Resource" uid="uid://npbki1lqf7oi" path="res://features/small_towers/data/heavy.tres" id="2_r1x0c"]
+[ext_resource type="Texture2D" uid="uid://hpbvcjw1wlf7" path="res://assets/Towers/4_side_tower.png" id="2_t6tju"]
+[ext_resource type="Script" uid="uid://fuq510tc73a8" path="res://features/core/object_pool.gd" id="3_s46ib"]
+[ext_resource type="PackedScene" uid="uid://iivthi8vrr7c" path="res://features/bullet/bullet.tscn" id="4_r1x0c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqfqe"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t6tju"]
+resource_local_to_scene = true
+radius = 16.0
+
+[node name="SmallTower" type="StaticBody2D" unique_id=1200105900 node_paths=PackedStringArray("up", "down", "left", "right")]
+script = ExtResource("1_ew7wo")
+data = ExtResource("2_r1x0c")
+up = NodePath("Markers/UpMarker")
+down = NodePath("Markers/DownMarker")
+left = NodePath("Markers/LeftMarker")
+right = NodePath("Markers/RightMarker")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1538521674]
+shape = SubResource("CircleShape2D_sqfqe")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1280641281]
+texture = ExtResource("2_t6tju")
+
+[node name="Markers" type="Node2D" parent="." unique_id=1701443165]
+
+[node name="UpMarker" type="Marker2D" parent="Markers" unique_id=847256306]
+position = Vector2(0, -8)
+
+[node name="DownMarker" type="Marker2D" parent="Markers" unique_id=2019616782]
+position = Vector2(0, 8)
+
+[node name="LeftMarker" type="Marker2D" parent="Markers" unique_id=268755167]
+position = Vector2(-8, -2)
+
+[node name="RightMarker" type="Marker2D" parent="Markers" unique_id=1158477059]
+position = Vector2(8, -2)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=298172249]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=226866296]
+shape = SubResource("CircleShape2D_t6tju")
+
+[node name="BulletPool" type="Node" parent="." unique_id=1807562031]
+script = ExtResource("3_s46ib")
+scene_to_pool = ExtResource("4_r1x0c")
+metadata/_custom_type_script = "uid://fuq510tc73a8"

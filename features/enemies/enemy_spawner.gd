@@ -20,13 +20,7 @@ func _ready():
 	_spawn_timer.one_shot = true
 	_spawn_timer.timeout.connect(_on_timer_timeout)
 	add_child(_spawn_timer)
-	# _schedule_spawn(0)
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	_spawn_enemy(1)
+	_schedule_spawn(0)
 
 func _on_timer_timeout() -> void:
 	var minute = (Time.get_ticks_msec() - _start_time) / 60_000 # 60 000 msecs / min
